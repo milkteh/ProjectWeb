@@ -385,7 +385,7 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="record-chart.php" class="active">
+            <a href="record-chart.php" ">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
@@ -513,7 +513,7 @@
   }
 
   //read all row from database table
-  $sql = "SELECT * FROM prenatal";
+  $sql = "SELECT * FROM admission_slip";
   $result = $connection->query($sql);
 
   if(!$result){
@@ -526,18 +526,15 @@
                 <th>Full Name</th>
                 <th>Date of Birth</th>
                 <th>Address</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Gestational Age</th>
-                <th>Due Date</th>
-                <th>Pregnancy History</th>
-                <th>Prenatal Vitamins</th>
+                <th>Contact Info</th>
+                <th>Emergency Contact</th>
+                <th>Insurance Info</th>
+                <th>Obstetric History</th>
+                <th>Current Pregnancy Details</th>
                 <th>Medical Conditions</th>
-                <th>Medications</th>
                 <th>Allergies</th>
-                <th>Smoking</th>
-                <th>Alcohol</th>
-                <th>Exercise</th>
+                <th>Emergency Contact Consent</th>
+                
             </tr>";
     while($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -545,18 +542,14 @@
                 <td>".$row['full_name']."</td>
                 <td>".$row['date_of_birth']."</td>
                 <td>".$row['address']."</td>
-                <td>".$row['phone_number']."</td>
-                <td>".$row['email']."</td>
-                <td>".$row['gestational_age']."</td>
-                <td>".$row['due_date']."</td>
-                <td>".$row['pregnancy_history']."</td>
-                <td>".$row['prenatal_vitamins']."</td>
+                <td>".$row['contact_info']."</td>
+                <td>".$row['emergency_contact']."</td>
+                <td>".$row['insurance_info']."</td>
+                <td>".$row['obstetric_history']."</td>
+                <td>".$row['current_pregnancy_details']."</td>
                 <td>".$row['medical_conditions']."</td>
-                <td>".$row['medications']."</td>
                 <td>".$row['allergies']."</td>
-                <td>".$row['smoking']."</td>
-                <td>".$row['alcohol']."</td>
-                <td>".$row['exercise']."</td>
+                <td>".$row['emergency_contact_consent']."</td>
               </tr>";
     }
     echo "</table>";
@@ -566,71 +559,56 @@
 ?>
 
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "fivestardb";
-   
-    //create connection
-    $connection = new mysqli($servername, $username, $password, $database);
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fivestardb";
 
+// Create connection
+$connection = new mysqli($servername, $username, $password, $database);
 
-$full_name = "";
-$date_of_birth = "";
-$address = "";
-$phone_number = "";
-$email = "";
-$gestational_age = "";
-$due_date = "";
-$pregnancy_history = "";
-$prenatal_vitamins = "";
-$medical_conditions = "";
-$medications = "";
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+// Define variables and initialize with empty values
+$full_name=""; 
+$date_of_birth=""; 
+$address="";
+$contact_info=""; 
+$emergency_contact ="";
+$insurance_info = "";
+$obstetric_history =""; 
+$current_pregnancy_details ="";
+$medical_conditions ="";
 $allergies = "";
-$smoking = "";
-$alcohol = "";
-$exercise = "";
+$emergency_contact_consent ="";
 
-$errorMessage = "";
-
-// Check if the form was submitted
+// Process form data when submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from the form
+
     $full_name = $_POST["full_name"];
     $date_of_birth = $_POST["date_of_birth"];
     $address = $_POST["address"];
-    $phone_number = $_POST["phone_number"];
-    $email = $_POST["email"];
-    $gestational_age = $_POST["gestational_age"];
-    $due_date = $_POST["due_date"];
-    $pregnancy_history = $_POST["pregnancy_history"];
-    $prenatal_vitamins = $_POST["prenatal_vitamins"];
-    $medical_conditions= $_POST["medical_conditions"];
-    $medications = $_POST["medications"];
+    $contact_info = $_POST["contact_info"];
+    $emergency_contact = $_POST["emergency_contact"];
+    $insurance_info = $_POST["insurance_info"];
+    $obstetric_history = $_POST["obstetric_history"];
+    $current_pregnancy_details = $_POST["current_pregnancy_details"];
+    $medical_conditions = $_POST["medical_conditions"];
     $allergies = $_POST["allergies"];
-    $smoking = $_POST["smoking"];
-    $alcohol = $_POST["alcohol"];
-    $exercise = $_POST["exercise"];
+    $emergency_contact_consent = $_POST["emergency_contact_consent"];
 
-    do{
-      if(empty($full_name) || empty($date_of_birth) || empty($address) || empty($phone_number) || empty($email) || empty($gestational_age) || empty($due_date) || empty($pregnancy_history) || empty($prenatal_vitamins) || empty($medical_conditions) || empty($medications) || empty($allergies) || empty($smoking) || empty($alcohol) || empty($exercise)){
-        $errorMessage = "All the fields are required";
-        break;
-      }
-      
-      $sql = "INSERT INTO prenatal (full_name, date_of_birth, address, phone_number, email, gestational_age, due_date, pregnancy_history, prenatal_vitamins, medical_conditions, medications, allergies, smoking, alcohol, exercise)" . 
-      "VALUES ('$full_name', '$date_of_birth', '$address', '$phone_number', '$email', '$gestational_age', '$due_date', '$pregnancy_history', '$prenatal_vitamins', '$medical_conditions', '$medications', '$allergies', '$smoking', '$alcohol', '$exercise')";
+    // Insert data into database
+    $sql = "INSERT INTO admission_slip (full_name, date_of_birth, address, contact_info, emergency_contact, insurance_info, obstetric_history, current_pregnancy_details, medical_conditions, allergies, emergency_contact_consent)" .
+            "VALUES ('$full_name', '$date_of_birth', '$address', '$contact_info', '$emergency_contact', '$insurance_info', '$obstetric_history', '$current_pregnancy_details', '$medical_conditions', '$allergies' , '$emergency_contact_consent')";
 
-      $result = $connection->query($sql);
+            $result = $connection->query($sql);
 
-      if(!$result){
-        $errorMessage = "Invalid Query: ". $connection->error;
-      }
+   if (!$result) {
+    $errorMessage = "Invalid Query: " . $connection->error;
 
-      
-    }while(false);
-
-
-
+} while (false);
 }
 ?>

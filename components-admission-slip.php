@@ -485,42 +485,44 @@
     </style>
 </head>
 <body>
+
+  
     <div class="container">
         <h1>Admission Slip</h1>
-        
+        <form method="POST" action="record-admission-slip.php">
         <!-- Patient Information Section -->
         <div class="section">
             <h2 class="section-header">Patient Information:</h2>
             <label for="full-name">Full Name:</label>
-            <input type="text" id="full-name" name="full-name">
+            <input type="text" id="full-name" name="full_name">
             
             <label for="date-of-birth">Date of Birth:</label>
-            <input type="text" id="date-of-birth" name="date-of-birth">
+            <input type="text" id="date-of-birth" name="date_of_birth">
             
             <label for="address">Address:</label>
             <input type="text" id="address" name="address">
             
             <label for="contact-info">Contact Information:</label>
-            <input type="text" id="contact-info" name="contact-info">
+            <input type="text" id="contact-info" name="contact_info">
             
             <label for="emergency-contact">Emergency Contact:</label>
-            <input type="text" id="emergency-contact" name="emergency-contact">
+            <input type="text" id="emergency-contact" name="emergency_contact">
             
             <label for="insurance-info">Insurance Information:</label>
-            <input type="text" id="insurance-info" name="insurance-info">
+            <input type="text" id="insurance-info" name="insurance_info">
         </div>
         
         <!-- Medical History Section -->
         <div class="section">
             <h2 class="section-header">Medical History:</h2>
             <label for="obstetric-history">Obstetric History:</label>
-            <textarea id="obstetric-history" name="obstetric-history" rows="4"></textarea>
+            <textarea id="obstetric-history" name="obstetric_history" rows="4"></textarea>
             
             <label for="current-pregnancy">Current Pregnancy Details:</label>
-            <textarea id="current-pregnancy" name="current-pregnancy" rows="4"></textarea>
+            <textarea id="current-pregnancy" name="current_pregnancy_details" rows="4"></textarea>
             
             <label for="medical-conditions">Medical Conditions:</label>
-            <textarea id="medical-conditions" name="medical-conditions" rows="4"></textarea>
+            <textarea id="medical-conditions" name="medical_conditions" rows="4"></textarea>
             
             <label for="allergies">Allergies:</label>
             <textarea id="allergies" name="allergies" rows="4"></textarea>
@@ -530,13 +532,17 @@
         <div class="section">
             <h2 class="section-header">Emergency Contact and Consent:</h2>
             <label for="emergency-contact-consent">Emergency Contact Information:</label>
-            <input type="text" id="emergency-contact-consent" name="emergency-contact-consent">
+            <input type="text" id="emergency-contact-consent" name="emergency_contact_consent">
             <!-- You can include a consent checkbox or any additional information here -->
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
         
+    
         <!-- Note Section -->
         <p><strong>Note:</strong> Please ensure all information provided is accurate. If you have any questions or concerns, feel free to contact us at [Birthing Home Contact Information].</p>
     </div>
+      </form>
+     
 </body>
 </html>
 

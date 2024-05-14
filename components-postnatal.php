@@ -508,7 +508,7 @@
                   <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
                   <div class="col-md-8 col-lg-9">
                     <select name="gender" id="gender" class="form-select">
-                      <option value="male">Male</option>
+
                       <option value="female">Female</option>
                       <option value="other">Other</option>
                     </select>

@@ -485,37 +485,39 @@
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Birthing Home Discharge Slip</h1>
+        <h1>Discharge Slip</h1>
+        <form method="POST" action="record-discharge-slip.php">
         
         <!-- Patient Information Section -->
         <div class="section">
             <h2 class="section-header">Patient Information:</h2>
             <label for="mother-name">Mother's Name:</label>
-            <input type="text" id="mother-name" name="mother-name">
+            <input type="text" id="mother-name" name="mother_name">
             
             <label for="baby-name">Baby's Name:</label>
-            <input type="text" id="baby-name" name="baby-name">
+            <input type="text" id="baby-name" name="baby_name">
             
             <label for="date-of-birth">Date of Birth (Baby):</label>
-            <input type="text" id="date-of-birth" name="date-of-birth">
+            <input type="text" id="date-of-birth" name="date_of_birth">
             
             <label for="address">Address:</label>
             <input type="text" id="address" name="address">
             
             <label for="contact-info">Contact Information:</label>
-            <input type="text" id="contact-info" name="contact-info">
+            <input type="text" id="contact-info" name="contact_info">
         </div>
         
         <!-- Medical Information Section -->
         <div class="section">
             <h2 class="section-header">Medical Information:</h2>
             <label for="birth-details">Details of the Birth:</label>
-            <textarea id="birth-details" name="birth-details" rows="4"></textarea>
+            <textarea id="birth-details" name="birth_details" rows="4"></textarea>
             
             <label for="vital-statistics">Baby's Vital Statistics:</label>
-            <p>Weight: <input type="text" id="baby-weight" name="baby-weight"> Length: <input type="text" id="baby-length" name="baby-length"></p>
-            <p>Apgar Scores (1min): <input type="text" id="apgar-1min" name="apgar-1min"> Apgar Scores (5min): <input type="text" id="apgar-5min" name="apgar-5min"></p>
+            <p>Weight: <input type="text" id="baby-weight" name="baby_weight"> Length: <input type="text" id="baby-length" name="baby_length"></p>
+            <p>Apgar Scores (1min): <input type="text" id="apgar-1min" name="apgar_1min"> Apgar Scores (5min): <input type="text" id="apgar-5min" name="apgar_5min"></p>
             
             <label for="complications">Complications during Birth:</label>
             <textarea id="complications" name="complications" rows="4"></textarea>
@@ -525,15 +527,19 @@
         <div class="section">
             <h2 class="section-header">Postpartum Care Instructions:</h2>
             <label for="mother-recovery">Mother's Recovery Instructions:</label>
-            <textarea id="mother-recovery" name="mother-recovery" rows="4"></textarea>
+            <textarea id="mother-recovery" name="mother_recovery" rows="4"></textarea>
             
             <label for="baby-care">Baby Care Instructions:</label>
-            <textarea id="baby-care" name="baby-care" rows="4"></textarea>
+            <textarea id="baby-care" name="baby_care" rows="4"></textarea>
             
             <label for="medication-followup">Medication and Follow-Up Instructions:</label>
-            <textarea id="medication-followup" name="medication-followup" rows="4"></textarea>
+            <textarea id="medication-followup" name="medication_followup" rows="4"></textarea>
         </div>
+        <button type="submit">Submit</button>
+      </form>
         
+
+
         <!-- Note Section -->
         <p><strong>Note:</strong> Please ensure all information provided is accurate. If you have any questions or concerns, feel free to contact us at [Birthing Home Contact Information].</p>
     </div>

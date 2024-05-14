@@ -385,7 +385,7 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="record-chart.php" class="active">
+            <a href="record-chart.php" >
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
@@ -458,12 +458,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Prenatal Records</h1>
+      <h1>Discharge Slip Records</h1>
       <nav>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Records</li>
-          <li class="breadcrumb-item active">Prenatal Records</li>
+          <li class="breadcrumb-item active">Discharge Slip Records</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -513,7 +513,7 @@
   }
 
   //read all row from database table
-  $sql = "SELECT * FROM prenatal";
+  $sql = "SELECT * FROM discharge_slip";
   $result = $connection->query($sql);
 
   if(!$result){
@@ -523,40 +523,40 @@
     echo "<table>
             <tr>
                 <th>ID</th>
-                <th>Full Name</th>
+                <th>Mother Name</th>
+                <th>Baby Name</th>
                 <th>Date of Birth</th>
                 <th>Address</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Gestational Age</th>
-                <th>Due Date</th>
-                <th>Pregnancy History</th>
-                <th>Prenatal Vitamins</th>
-                <th>Medical Conditions</th>
-                <th>Medications</th>
-                <th>Allergies</th>
-                <th>Smoking</th>
-                <th>Alcohol</th>
-                <th>Exercise</th>
+                <th>Contact Info</th>
+                <th>Birth details</th>
+                <th>Baby Weight</th>
+                <th>Baby Length</th>
+                <th>Apgar 1min</th>
+                <th>Apgar 5min</th>
+                <th>Complications</th>
+                <th>Mother Recovery</th>
+                <th>Baby Care</th>
+                <th>Medication Follow up</th>
+
             </tr>";
     while($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>".$row['id']."</td>
-                <td>".$row['full_name']."</td>
+                <td>".$row['mother_name']."</td>
+                <td>".$row['baby_name']."</td>
                 <td>".$row['date_of_birth']."</td>
                 <td>".$row['address']."</td>
-                <td>".$row['phone_number']."</td>
-                <td>".$row['email']."</td>
-                <td>".$row['gestational_age']."</td>
-                <td>".$row['due_date']."</td>
-                <td>".$row['pregnancy_history']."</td>
-                <td>".$row['prenatal_vitamins']."</td>
-                <td>".$row['medical_conditions']."</td>
-                <td>".$row['medications']."</td>
-                <td>".$row['allergies']."</td>
-                <td>".$row['smoking']."</td>
-                <td>".$row['alcohol']."</td>
-                <td>".$row['exercise']."</td>
+                <td>".$row['contact_info']."</td>
+                <td>".$row['birth_details']."</td>
+                <td>".$row['baby_weight']."</td>
+                <td>".$row['baby_length']."</td>
+                <td>".$row['apgar_1min']."</td>
+                <td>".$row['apgar_5min']."</td>
+                <td>".$row['complications']."</td>
+                <td>".$row['mother_recovery']."</td>
+                <td>".$row['baby_care']."</td>
+                <td>".$row['medication_followup']."</td>
+                
               </tr>";
     }
     echo "</table>";
@@ -574,63 +574,50 @@
     //create connection
     $connection = new mysqli($servername, $username, $password, $database);
 
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
 
-$full_name = "";
-$date_of_birth = "";
-$address = "";
-$phone_number = "";
-$email = "";
-$gestational_age = "";
-$due_date = "";
-$pregnancy_history = "";
-$prenatal_vitamins = "";
-$medical_conditions = "";
-$medications = "";
-$allergies = "";
-$smoking = "";
-$alcohol = "";
-$exercise = "";
-
-$errorMessage = "";
+$mother_name= "";
+$baby_name = "";
+$date_of_birth= "";
+$address= "";
+$contact_info = "";
+$birth_details = "";
+$baby_weight = "";
+$baby_length = "";
+$apgar_1min = "";
+$apgar_5min = "";
+$complications = "";
+$mother_recovery = "";
+$baby_care = "";
+$medication_followup = "";
 
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from the form
-    $full_name = $_POST["full_name"];
+    $mother_name = $_POST["mother_name"];
+    $baby_name = $_POST["baby_name"];
     $date_of_birth = $_POST["date_of_birth"];
     $address = $_POST["address"];
-    $phone_number = $_POST["phone_number"];
-    $email = $_POST["email"];
-    $gestational_age = $_POST["gestational_age"];
-    $due_date = $_POST["due_date"];
-    $pregnancy_history = $_POST["pregnancy_history"];
-    $prenatal_vitamins = $_POST["prenatal_vitamins"];
-    $medical_conditions= $_POST["medical_conditions"];
-    $medications = $_POST["medications"];
-    $allergies = $_POST["allergies"];
-    $smoking = $_POST["smoking"];
-    $alcohol = $_POST["alcohol"];
-    $exercise = $_POST["exercise"];
+    $contact_info = $_POST["contact_info"];
+    $birth_details = $_POST["birth_details"];
+    $baby_weight = $_POST["baby_weight"];
+    $baby_length = $_POST["baby_length"];
+    $apgar_1min = $_POST["apgar_1min"];
+    $apgar_5min = $_POST["apgar_5min"];
+    $complications = $_POST["complications"];
+    $mother_recovery = $_POST["mother_recovery"];
+    $baby_care = $_POST["baby_care"];
+    $medication_followup = $_POST["medication_followup"];
 
-    do{
-      if(empty($full_name) || empty($date_of_birth) || empty($address) || empty($phone_number) || empty($email) || empty($gestational_age) || empty($due_date) || empty($pregnancy_history) || empty($prenatal_vitamins) || empty($medical_conditions) || empty($medications) || empty($allergies) || empty($smoking) || empty($alcohol) || empty($exercise)){
-        $errorMessage = "All the fields are required";
-        break;
-      }
-      
-      $sql = "INSERT INTO prenatal (full_name, date_of_birth, address, phone_number, email, gestational_age, due_date, pregnancy_history, prenatal_vitamins, medical_conditions, medications, allergies, smoking, alcohol, exercise)" . 
-      "VALUES ('$full_name', '$date_of_birth', '$address', '$phone_number', '$email', '$gestational_age', '$due_date', '$pregnancy_history', '$prenatal_vitamins', '$medical_conditions', '$medications', '$allergies', '$smoking', '$alcohol', '$exercise')";
+    $sql = "INSERT INTO discharge_slip (mother_name, baby_name, date_of_birth, address, contact_info, birth_details, baby_weight, baby_length, apgar_1min, apgar_5min, complications, mother_recovery, baby_care, medication_followup)".
+    "VALUES ('$mother_name', '$baby_name', '$date_of_birth', '$address', '$contact_info', '$birth_details,', '$baby_weight', '$baby_length', '$apgar_1min', '$apgar_5min', '$complications', '$mother_recovery', '$baby_care', '$medication_followup')";
 
-      $result = $connection->query($sql);
+$result = $connection->query($sql);
 
-      if(!$result){
-        $errorMessage = "Invalid Query: ". $connection->error;
-      }
+if (!$result) {
+$errorMessage = "Invalid Query: " . $connection->error;
 
-      
-    }while(false);
-
-
-
+} while (false);
 }
 ?>
