@@ -36,6 +36,29 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <!-- Add this style block inside the <head> tag of your HTML document -->
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
+
 </head>
 
 <body>
@@ -357,10 +380,10 @@
       </li><!-- End Transfer Refferal Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link " data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Records</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
           <li>
             <a href="record-chart.php">
               <i class="bi bi-circle"></i><span>Charts</span>
@@ -392,8 +415,8 @@
             </a>
           </li>
           <li>
-            <a href="record-checkUp.php">
-              <i class="bi bi-circle"></i><span>Check Up</span>
+            <a href="record-checkUp.php" class="active">
+              <i class="bi bi-circle"></i><span>Check Ups</span>
             </a>
           </li>
         </ul>
@@ -440,11 +463,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Check Ups</h1>
       <nav>
-        <ol class="breadcrumb">
+      <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item">Records</li>
+          <li class="breadcrumb-item active">Check Ups</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -478,3 +502,96 @@
 </body>
 
 </html>
+
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "fivestardb";
+ 
+  //create connection
+  $connection = new mysqli($servername, $username, $password, $database);
+
+  //check connection
+  if($connection->connect_error){
+    die("Connection failed:" .$connection->connect_error);
+  }
+
+  //read all row from database table
+  $sql = "SELECT * FROM checkups";
+  $result = $connection->query($sql);
+
+  if(!$result){
+    die("Invalid Query:". $connection->error);
+  }
+
+    echo "<table>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Type of Check Up</th>
+               
+            </tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>".$row['id']."</td>
+                <td>".$row['name']."</td>
+                <td>".$row['email']."</td>
+                <td>".$row['phone_number']."</td>
+                <td>".$row['date']."</td>
+                <td>".$row['time']."</td>
+                <td>".$row['type']."</td>
+                <td>
+                  <a class='btn' href = 'edit.php?id=$row[id]'> Edit </a>
+                  <a class='btn' href = 'delete.php?id=$row[id]'> Delete </a>
+                <td/>
+    
+              </tr>";
+    }
+    echo "</table>";
+
+// Close database connection
+
+?>
+<?php
+$name = "";
+$email = "";
+$phone_number = "";
+$date = "";
+$time = "";
+$type = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve data from the form
+  
+  $name= $_POST["name"];
+  $email = $_POST["email"];
+  $phone_number = $_POST["phone_number"];
+  $date = $_POST["date"];
+  $time = $_POST["time"];
+  $type = $_POST["type"];
+
+  do{
+    if(empty($name) || empty($email) || empty($phone_number) || empty($date) || empty($time) || empty($type) ){
+      $errorMessage = "All the fields are required";
+      break;
+    }
+
+    $sql = "INSERT INTO checkups (name, email, phone_number, date, time, type)" . 
+      "VALUES ('$name', '$email', '$phone_number', '$date', '$time', '$type' )";
+
+      $result = $connection->query($sql);
+
+      if(!$result){
+        $errorMessage = "Invalid Query: ". $connection->error;
+      }
+
+      
+    }while(false);
+  
+  }
+  ?>

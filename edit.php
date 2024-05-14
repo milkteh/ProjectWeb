@@ -1,3 +1,83 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fivestardb";
+
+// Create connection
+$connection = new mysqli($servername, $username, $password, $database);
+
+// Check connection
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+}
+
+$id = "";
+$name = "";
+$email = "";
+$phone_number = "";
+$date = "";
+$time = "";
+$type = "";
+$errorMessage = "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if (!isset($_GET["id"])) {
+        header("Location: record-checkUp.php");
+        exit;
+    }
+
+    $id = $_GET["id"];
+
+    // Read row from database table
+    $sql = "SELECT * FROM checkups WHERE id=?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row["name"];
+        $email = $row["email"];
+        $phone_number = $row["phone_number"];
+        $date = $row["date"];
+        $time = $row["time"];
+        $type = $row["type"];
+    } else {
+        header("Location: record-checkUp.php");
+        exit;
+    }
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST["id"];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone_number = $_POST["phone_number"];
+    $date = $_POST["date"];
+    $time = $_POST["time"];
+    $type = $_POST["type"];
+
+    // Basic validation
+    if (empty($name) || empty($email) || empty($phone_number) || empty($date) || empty($time) || empty($type)) {
+        $errorMessage = "All fields are required";
+    } else {
+        // Update record in database
+        $sql = "UPDATE checkups SET name=?, email=?, phone_number=?, date=?, time=?, type=? WHERE id=?";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("ssssssi", $name, $email, $phone_number, $date, $time, $type, $id);
+        if ($stmt->execute()) {
+            header("Location: record-checkUp.php");
+            exit;
+        } else {
+            $errorMessage = "Error updating record: " . $connection->error;
+        }
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +85,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Five Star Birthing Home </title>
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -218,14 +298,14 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>Admin</h6>
-              
+              <span></span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -235,7 +315,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -244,13 +324,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.php">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
+           
               <hr class="dropdown-divider">
             </li>
 
@@ -275,44 +349,44 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-      
+
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Patients Registration</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-chart.php">
+            <a href="components-chart.html">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
           <li>
-            <a href="components-prenatal.php">
+            <a href="components-prenatal.html">
               <i class="bi bi-circle"></i><span>Prenatal</span>
             </a>
           </li>
           <li>
-            <a href="components-postnatal.php">
+            <a href="components-Postnatal.html">
               <i class="bi bi-circle"></i><span>Postnatal</span>
             </a>
           </li>
           <li>
-            <a href="components-admission-slip.php">
-              <i class="bi bi-circle"></i><span>Admission Slip</span>
+            <a href="components-AddmissionSlip.html">
+              <i class="bi bi-circle"></i><span>Addmission Slip</span>
             </a>
           </li>
           <li>
-            <a href="components-discharge-slip.php">
+            <a href="components-DischargeSlip.html">
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
           <li>
-            <a href="components-partoGraph.php">
+            <a href="components-PartoGraph.html">
               <i class="bi bi-circle"></i><span>PartoGraph</span>
             </a>
           </li>
@@ -321,13 +395,13 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Appointment Scheduling</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-CheckUps.php">
-              <i class="bi bi-circle"></i><span>Check Ups</span>
+            <a href="forms-CheckUps.php" class="active">
+              <i class="bi bi-circle"></i><span>Check Up</span>
             </a>
           </li>
           <li>
@@ -341,7 +415,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Appointment Scheduling Nav -->
+      </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -355,6 +429,8 @@
           </li>
         </ul>
       </li><!-- End Transfer Refferal Nav -->
+
+      
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -391,14 +467,8 @@
               <i class="bi bi-circle"></i><span>PartoGraph</span>
             </a>
           </li>
-          <li>
-            <a href="record-checkUp.php">
-              <i class="bi bi-circle"></i><span>Check Up</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Charts Nav -->
-
 
       <li class="nav-heading">Pages</li>
 
@@ -432,7 +502,6 @@
       </li><!-- End Login Page Nav -->
 
 
-
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -440,24 +509,88 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Dashboard</h1>
+      <h1>Check Ups</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item">Appointment Scheduling</li>
+          <li class="breadcrumb-item active">Check Ups</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-up Appointment Form</title>
+    <style>
+        .con {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+    <form method="post">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <label>Name:</label><br>
+        <input type="text" name="name" value="<?php echo $name; ?>"><br>
+        <label>Email:</label><br>
+        <input type="email" name="email" value="<?php echo $email; ?>"><br>
+        <label>Phone Number:</label><br>
+        <input type="text" name="phone_number" value="<?php echo $phone_number; ?>"><br>
+        <label>Date:</label><br>
+        <input type="date" name="date" value="<?php echo $date; ?>"><br>
+        <label>Time:</label><br>
+        <input type="time" name="time" value="<?php echo $time; ?>"><br>
+        <label>Type:</label><br>
+        <input type="text" name="type" value="<?php echo $type; ?>"><br>
+        <input type="submit" value="Submit"><br>
+        <span style="color: red;"><?php echo $errorMessage; ?></span>
+    </form>
+    </div>
+</body>
+</html>
 
 
 
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+ 
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-       <a href="https://bootstrapmade.com/"></a>
-    </div>
+     
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
