@@ -46,7 +46,7 @@
 
   th, td {
     border: 1px solid #dddddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
   }
 
@@ -380,10 +380,10 @@
       </li><!-- End Transfer Refferal Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link " data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Records</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
           <li>
             <a href="record-chart.php" class="active">
               <i class="bi bi-circle"></i><span>Charts</span>
@@ -458,12 +458,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Chart Records</h1>
+      <h1>Prenatal Records</h1>
       <nav>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Records</li>
-          <li class="breadcrumb-item active">Chart Records</li>
+          <li class="breadcrumb-item active">Prenatal Records</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -498,36 +498,37 @@
 
 </html>
 
-
-
 <?php
-// Establish connection to your MySQL database
-$servername = "localhost";
-$username = "root"; // default username for XAMPP
-$password = ""; // default password for XAMPP
-$database = "fivestardb"; // Name of your database
-$conn = new mysqli($servername, $username, $password, $database);
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "fivestardb";
+ 
+  //create connection
+  $connection = new mysqli($servername, $username, $password, $database);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+  //check connection
+  if($connection->connect_error){
+    die("Connection failed:" .$connection->connect_error);
+  }
 
-// Retrieve data from the database table
-$sql = "SELECT * FROM chart";
-$result = $conn->query($sql);
+  //read all row from database table
+  $sql = "SELECT * FROM chart";
+  $result = $connection->query($sql);
 
-// Display the retrieved data
-if ($result->num_rows > 0) {
+  if(!$result){
+    die("Invalid Query:". $connection->error);
+  }
+
     echo "<table>
             <tr>
                 <th>ID</th>
-                <th>Patient Name</th>
+                <th>Patience Name</th>
                 <th>Date of Birth</th>
                 <th>Address</th>
                 <th>Contact Number</th>
                 <th>Date of Admission</th>
-                <th>Expected Due Date</th>
+                <th>Expected due date</th>
                 <th>Delivery Type</th>
                 <th>Delivery Date</th>
                 <th>Delivery Time</th>
@@ -559,69 +560,77 @@ if ($result->num_rows > 0) {
               </tr>";
     }
     echo "</table>";
-} else {
-    echo "0 results";
-}
 
 // Close database connection
-$conn->close();
+
 ?>
 
 <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "fivestardb";
+   
+    //create connection
+    $connection = new mysqli($servername, $username, $password, $database);
+
+
+$patient_name = "";
+$date_of_birth = "";
+$address = "";
+$contact_number = "";
+$date_of_admission = "";
+$expected_due_date = "";
+$delivery_type = "";
+$delivery_date = "";
+$delivery_time = "";
+$delivery_weight = "";
+$medical_conditions = "";
+$allergies = "";
+$medications = "";
+$previous_pregnancies = "";
+$complications = "";
+
+$errorMessage = "";
+
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the form
-    $patient_name = $_POST["patient_name"] ?? '';
-    $date_of_birth = $_POST["date_of_birth"] ?? '';
-    $address = $_POST["address"] ?? '';
-    $contact_number = $_POST["contact_number"] ?? '';
-    $date_of_admission = $_POST["date_of_admission"] ?? '';
-    $expected_due_date = $_POST["expected_due_date"] ?? '';
-    $delivery_type = $_POST["delivery_type"] ?? '';
-    $delivery_date = $_POST["delivery_date"] ?? '';
-    $delivery_time = $_POST["delivery_time"] ?? '';
-    $delivery_weight = $_POST["delivery_weight"] ?? '';
-    $medical_conditions = $_POST["medical_conditions"] ?? '';
-    $allergies = $_POST["allergies"] ?? '';
-    $medications = $_POST["medications"] ?? '';
-    $previous_pregnancies = $_POST["previous_pregnancies"] ?? '';
-    $complications = $_POST["complications"] ?? '';
-    // Retrieve other form fields in a similar manner...
+    $patient_name = $_POST["patient_name"];
+    $date_of_birth = $_POST["date_of_birth"];
+    $address = $_POST["address"];
+    $contact_number = $_POST["contact_number"];
+    $date_of_admission = $_POST["date_of_admission"];
+    $expected_due_date = $_POST["expected_due_date"];
+    $delivery_type = $_POST["delivery_type"];
+    $delivery_date = $_POST["delivery_date"];
+    $delivery_time = $_POST["delivery_time"];
+    $delivery_weight= $_POST["delivery_weight"];
+    $medical_conditions = $_POST["medical_conditions"];
+    $allergies = $_POST["allergies"];
+    $medications = $_POST["medications"];
+    $previous_pregnancies = $_POST["previous_pregnancies"];
+    $complications = $_POST["complications"];
 
-    // Validate form fields (you should perform more thorough validation as needed)
-    $errors = [];
-    if (empty($patient_name)) {
-        $errors[] = "Patient name is required.";
-    }
-    // Validate other form fields...
+    do{
+      if(empty($patient_name) || empty($date_of_birth) || empty($address) || empty($contact_number) || empty($date_of_admission) || empty($expected_due_date) || empty($delivery_type) || empty($delivery_date) || empty($delivery_time) || empty($delivery_weight) || empty($medical_conditions) || empty($allergies) || empty($medications) || empty($previous_pregnancies) || empty($complications)){
+        $errorMessage = "All the fields are required";
+        break;
+      }
+      
+      $sql = "INSERT INTO chart (patient_name, date_of_birth, address, contact_number, date_of_admission, expected_due_date, delivery_type, delivery_date, delivery_time, delivery_weight, medical_conditions, allergies, medications, previous_pregnancies, complications)" . 
+      "VALUES ('$patient_name', '$date_of_birth', '$address', '$contact_number', '$date_of_admission', '$expected_due_date', '$delivery_type', '$delivery_date', '$delivery_time', '$delivery_weight', '$medical_conditions', '$allergies', '$medications', '$previous_pregnancies', '$complications')";
 
-    // If there are no errors, proceed to insert data into the database
-    if (empty($errors)) {
-        try {
-            // Connect to the database (replace 'your_database_name', 'username', and 'password' with your actual database credentials)
-            $pdo = new PDO("mysql:host=localhost;dbname=fivestardb", "root", "");
-            // Set the PDO error mode to exception
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $result = $connection->query($sql);
 
-            // Prepare a SQL statement for insertion
-            $stmt = $pdo->prepare("INSERT INTO chart (patient_name, date_of_birth, address, contact_number, date_of_admission, expected_due_date, delivery_type, delivery_date, delivery_time, delivery_weight, medical_conditions, allergies, medications, previous_pregnancies, complications) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            // Bind parameters and execute the statement
-            $stmt->execute([$patient_name, $date_of_birth, $address, $contact_number, $date_of_admission, $expected_due_date, $delivery_type, $delivery_date, $delivery_time, $delivery_weight, $medical_conditions, $allergies, $medications, $previous_pregnancies, $complications]);
+      if(!$result){
+        $errorMessage = "Invalid Query: ". $connection->error;
+      }
 
-            // Optionally, you can redirect the user to a success page or display a success message
-            // header("Location: success.php");
-            // exit;
-            
-        } catch (PDOException $e) {
-            // Handle database errors
-            echo "Error: " . $e->getMessage();
-        }
-    } else {
-        // If there are errors, display them to the user
-        foreach ($errors as $error) {
-            echo "<p>Error: $error</p>";
-        }
-    }
+      
+    }while(false);
+
+
+
 }
 ?>
-
