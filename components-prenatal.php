@@ -490,6 +490,7 @@
     </style>
 </head>
 <body>
+  <form method="POST" action="record-prenatal.php">
     <div class="container">
         <h1>Prenatal Form</h1>
         
@@ -497,35 +498,35 @@
         <div class="section">
             <h2 class="section-header">Personal Information:</h2>
             <label for="full-name">Full Name:</label>
-            <input type="text" id="full-name" name="full-name">
+            <input type="text" id="full_name" name="full_name" >
             
             <label for="date-of-birth">Date of Birth:</label>
-            <input type="text" id="date-of-birth" name="date-of-birth">
+            <input type="text" id="date_of_birth" name="date_of_birth" >
             
             <label for="address">Address:</label>
             <input type="text" id="address" name="address">
             
             <label for="phone-number">Phone Number:</label>
-            <input type="text" id="phone-number" name="phone-number">
+            <input type="text" id="phone_number" name="phone_number">
             
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
+            <input type="text" id="email" name="email" >
         </div>
         
         <!-- Pregnancy Information Section -->
         <div class="section">
             <h2 class="section-header">Pregnancy Information:</h2>
             <label for="gestational-age">Gestational Age (weeks):</label>
-            <input type="number" id="gestational-age" name="gestational-age">
+            <input type="number" id="gestational_age" name="gestational_age" >
             
             <label for="due-date">Estimated Due Date:</label>
-            <input type="text" id="due-date" name="due-date">
+            <input type="text" id="due_date" name="due_date" >
             
             <label for="pregnancy-history">Pregnancy History:</label>
-            <textarea id="pregnancy-history" name="pregnancy-history" rows="4"></textarea>
+            <textarea id="pregnancy_history" name="pregnancy_history" rows="4"></textarea>
             
             <label for="prenatal-vitamins">Prenatal Vitamins Taken:</label>
-            <select id="prenatal-vitamins" name="prenatal-vitamins">
+            <select id="prenatal_vitamins" name="prenatal_vitamins" >
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
@@ -535,7 +536,7 @@
         <div class="section">
             <h2 class="section-header">Medical History:</h2>
             <label for="medical-conditions">Existing Medical Conditions:</label>
-            <textarea id="medical-conditions" name="medical-conditions" rows="4"></textarea>
+            <textarea id="medical_conditions" name="medical_conditions" rows="4"></textarea>
             
             <label for="medications">Current Medications:</label>
             <textarea id="medications" name="medications" rows="4"></textarea>
@@ -560,12 +561,15 @@
             </select>
             
             <label for="exercise">Exercise Routine:</label>
-            <textarea id="exercise" name="exercise" rows="4"></textarea>
+            <textarea id="exercise" name="exercise" rows="4" ></textarea>
         </div>
+        <button type="submit">Submit</button>
+
         
         <!-- Note Section -->
-        <p><strong>Note:</strong> Please fill out this form accurately. If you have any questions or concerns, feel free to contact us at [Birthing Home Contact Information].</p>
-    </div>
+
+      </div>
+    </form>
 </body>
 </html>
 

@@ -46,7 +46,7 @@
 
   th, td {
     border: 1px solid #dddddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
   }
 
@@ -380,7 +380,7 @@
       </li><!-- End Transfer Refferal Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link " data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Records</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
@@ -497,3 +497,140 @@
 </body>
 
 </html>
+
+<?php
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $database = "fivestardb";
+ 
+  //create connection
+  $connection = new mysqli($servername, $username, $password, $database);
+
+  //check connection
+  if($connection->connect_error){
+    die("Connection failed:" .$connection->connect_error);
+  }
+
+  //read all row from database table
+  $sql = "SELECT * FROM prenatal";
+  $result = $connection->query($sql);
+
+  if(!$result){
+    die("Invalid Query:". $connection->error);
+  }
+
+    echo "<table>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Gestational Age</th>
+                <th>Due Date</th>
+                <th>Pregnancy History</th>
+                <th>Prenatal Vitamins</th>
+                <th>Medical Conditions</th>
+                <th>Medications</th>
+                <th>Allergies</th>
+                <th>Smoking</th>
+                <th>Alcohol</th>
+                <th>Exercise</th>
+            </tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>".$row['id']."</td>
+                <td>".$row['full_name']."</td>
+                <td>".$row['date_of_birth']."</td>
+                <td>".$row['address']."</td>
+                <td>".$row['phone_number']."</td>
+                <td>".$row['email']."</td>
+                <td>".$row['gestational_age']."</td>
+                <td>".$row['due_date']."</td>
+                <td>".$row['pregnancy_history']."</td>
+                <td>".$row['prenatal_vitamins']."</td>
+                <td>".$row['medical_conditions']."</td>
+                <td>".$row['medications']."</td>
+                <td>".$row['allergies']."</td>
+                <td>".$row['smoking']."</td>
+                <td>".$row['alcohol']."</td>
+                <td>".$row['exercise']."</td>
+              </tr>";
+    }
+    echo "</table>";
+
+// Close database connection
+
+?>
+
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "fivestardb";
+   
+    //create connection
+    $connection = new mysqli($servername, $username, $password, $database);
+
+
+$full_name = "";
+$date_of_birth = "";
+$address = "";
+$phone_number = "";
+$email = "";
+$gestational_age = "";
+$due_date = "";
+$pregnancy_history = "";
+$prenatal_vitamins = "";
+$medical_conditions = "";
+$medications = "";
+$allergies = "";
+$smoking = "";
+$alcohol = "";
+$exercise = "";
+
+$errorMessage = "";
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve data from the form
+    $full_name = $_POST["full_name"];
+    $date_of_birth = $_POST["date_of_birth"];
+    $address = $_POST["address"];
+    $phone_number = $_POST["phone_number"];
+    $email = $_POST["email"];
+    $gestational_age = $_POST["gestational_age"];
+    $due_date = $_POST["due_date"];
+    $pregnancy_history = $_POST["pregnancy_history"];
+    $prenatal_vitamins = $_POST["prenatal_vitamins"];
+    $medical_conditions= $_POST["medical_conditions"];
+    $medications = $_POST["medications"];
+    $allergies = $_POST["allergies"];
+    $smoking = $_POST["smoking"];
+    $alcohol = $_POST["alcohol"];
+    $exercise = $_POST["exercise"];
+
+    do{
+      if(empty($full_name) || empty($date_of_birth) || empty($address) || empty($phone_number) || empty($email) || empty($gestational_age) || empty($due_date) || empty($pregnancy_history) || empty($prenatal_vitamins) || empty($medical_conditions) || empty($medications) || empty($allergies) || empty($smoking) || empty($alcohol) || empty($exercise)){
+        $errorMessage = "All the fields are required";
+        break;
+      }
+      
+      $sql = "INSERT INTO prenatal (full_name, date_of_birth, address, phone_number, email, gestational_age, due_date, pregnancy_history, prenatal_vitamins, medical_conditions, medications, allergies, smoking, alcohol, exercise)" . 
+      "VALUES ('$full_name', '$date_of_birth', '$address', '$phone_number', '$email', '$gestational_age', '$due_date', '$pregnancy_history', '$prenatal_vitamins', '$medical_conditions', '$medications', '$allergies', '$smoking', '$alcohol', '$exercise')";
+
+      $result = $connection->query($sql);
+
+      if(!$result){
+        $errorMessage = "Invalid Query: ". $connection->error;
+      }
+
+      
+    }while(false);
+
+
+
+}
+?>
