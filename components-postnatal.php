@@ -445,122 +445,187 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <title>Postnatal Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        p {
-            margin-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section-header {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-    </style>
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-Natal Form</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <h1>Postnatal Form</h1>
-        
-        <!-- Mother's Recovery Information Section -->
-        <div class="section">
-            <h2 class="section-header">Mother's Recovery Information:</h2>
-            <label for="incision-care">Incision Care (if applicable):</label>
-            <textarea id="incision-care" name="incision-care" rows="4"></textarea>
-            
-            <label for="pain-management">Pain Management Recommendations:</label>
-            <textarea id="pain-management" name="pain-management" rows="4"></textarea>
-            
-            <label for="rest-recovery">Rest and Recovery Guidelines:</label>
-            <textarea id="rest-recovery" name="rest-recovery" rows="4"></textarea>
+
+  <!-- ======= Header ======= -->
+  
+  <main id="main" class="main">
+
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Post-Natal Form</h5>
+
+              <!-- Post-Natal Form -->
+              <form method="POST" action="record-postnatal.php">
+
+                <div class="row mb-3">
+                  <label for="first-name" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="first_name" type="text" class="form-control" id="first-name">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="middle-name" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="middle_name" type="text" class="form-control" id="middle-name">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="last-name" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="last_name" type="text" class="form-control" id="last-name">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="birthday" class="col-md-4 col-lg-3 col-form-label">Birthday</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="birthday" type="date" class="form-control" id="birthday">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select name="gender" id="gender" class="form-select">
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="address" type="text" class="form-control" id="address">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="email" type="email" class="form-control" id="email">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="phone" type="text" class="form-control" id="phone">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="marital-status" class="col-md-4 col-lg-3 col-form-label">Marital Status</label>
+                  <div class="col-md-8 col-lg-9">
+                    <select name="marital_status" id="marital-status" class="form-select">
+                      <option value="single">Single</option>
+                      <option value="married">Married</option>
+                      <option value="divorced">Divorced</option>
+                      <option value="widowed">Widowed</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="emergency-contact-name" class="col-md-4 col-lg-3 col-form-label">Emergency Contact Name</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="emergency_contact_name" type="text" class="form-control" id="emergency-contact-name">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="emergency-contact-phone" class="col-md-4 col-lg-3 col-form-label">Emergency Contact Phone</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="emergency_contact_phone" type="text" class="form-control" id="emergency-contact-phone">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="insurance-provider" class="col-md-4 col-lg-3 col-form-label">Insurance Provider</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="insurance_provider" type="text" class="form-control" id="insurance-provider">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="policy-number" class="col-md-4 col-lg-3 col-form-label">Policy Number</label>
+                  <div class="col-md-8 col-lg-9">
+                    <input name="policy_number" type="text" class="form-control" id="policy-number">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="medical-history" class="col-md-4 col-lg-3 col-form-label">Medical History</label>
+                  <div class="col-md-8 col-lg-9">
+                    <textarea name="medical_history" class="form-control" id="medical-history"></textarea>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="current-medications" class="col-md-4 col-lg-3 col-form-label">Current Medications</label>
+                  <div class="col-md-8 col-lg-9">
+                    <textarea name="current_medications" class="form-control" id="current-medications"></textarea>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label for="allergies" class="col-md-4 col-lg-3 col-form-label">Allergies</label>
+                  <div class="col-md-8 col-lg-9">
+                    <textarea name="allergies" class="form-control" id="allergies"></textarea>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+
+              </form><!-- End Post-Natal Form -->
+
+            </div>
+          </div>
+
         </div>
-        
-        <!-- Baby's Health Information Section -->
-        <div class="section">
-            <h2 class="section-header">Baby's Health Information:</h2>
-            <label for="feeding-guidelines">Feeding Guidelines:</label>
-            <textarea id="feeding-guidelines" name="feeding-guidelines" rows="4"></textarea>
-            
-            <label for="diapering-bathing">Diapering and Bathing Instructions:</label>
-            <textarea id="diapering-bathing" name="diapering-bathing" rows="4">When bathing your baby, make sure to use lukewarm water and a gentle baby soap. Support your baby's head and neck with one hand while bathing, and use your other hand to gently wash their body. Pay special attention to areas like behind the ears, under the chin, and in the diaper area. After bathing, pat your baby dry with a soft towel, especially in skin folds, and apply a mild baby lotion if necessary.</textarea>
-        </div>
-        
-        <!-- Follow-Up Information Section -->
-        <div class="section">
-            <h2 class="section-header">Follow-Up Information:</h2>
-            <label for="follow-up-appointments">Follow-Up Appointments:</label>
-            <textarea id="follow-up-appointments" name="follow-up-appointments" rows="4"></textarea>
-            
-            <label for="postnatal-medications">Prescribed Postnatal Medications:</label>
-            <textarea id="postnatal-medications" name="postnatal-medications" rows="4"></textarea>
-        </div>
-        
-        <!-- Note Section -->
-        <p><strong>Note:</strong> Please fill out this form accurately. If you have any questions or concerns, feel free to contact us at [Birthing Home Contact Information].</p>
-    </div>
-</body>
-</html>
-
-
-
-
-
-
-
+      </div>
+    </section>
 
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-    
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>

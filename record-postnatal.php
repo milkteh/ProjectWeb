@@ -513,7 +513,7 @@
   }
 
   //read all row from database table
-  $sql = "SELECT * FROM prenatal";
+  $sql = "SELECT * FROM postnatal";
   $result = $connection->query($sql);
 
   if(!$result){
@@ -523,40 +523,43 @@
     echo "<table>
             <tr>
                 <th>ID</th>
-                <th>Full Name</th>
-                <th>Date of Birth</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Birthday</th>
+                <th>Gender</th>
                 <th>Address</th>
-                <th>Phone Number</th>
                 <th>Email</th>
-                <th>Gestational Age</th>
-                <th>Due Date</th>
-                <th>Pregnancy History</th>
-                <th>Prenatal Vitamins</th>
-                <th>Medical Conditions</th>
-                <th>Medications</th>
+                <th>Phone</th>
+                <th>Marital Status</th>
+                <th>Emergency Contact Name</th>
+                <th>Emergency Contact Phone</th>
+                <th>Insurance Provider</th>
+                <th>Policy Number</th>
+                <th>Medical History</th>
+                <th>Current Madications</th>
                 <th>Allergies</th>
-                <th>Smoking</th>
-                <th>Alcohol</th>
-                <th>Exercise</th>
+                
             </tr>";
     while($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>".$row['id']."</td>
-                <td>".$row['full_name']."</td>
-                <td>".$row['date_of_birth']."</td>
+                <td>".$row['first_name']."</td>
+                <td>".$row['middle_name']."</td>
+                <td>".$row['last_name']."</td>
+                <td>".$row['birthday']."</td>
+                <td>".$row['gender']."</td>
                 <td>".$row['address']."</td>
-                <td>".$row['phone_number']."</td>
                 <td>".$row['email']."</td>
-                <td>".$row['gestational_age']."</td>
-                <td>".$row['due_date']."</td>
-                <td>".$row['pregnancy_history']."</td>
-                <td>".$row['prenatal_vitamins']."</td>
-                <td>".$row['medical_conditions']."</td>
-                <td>".$row['medications']."</td>
+                <td>".$row['phone']."</td>
+                <td>".$row['marital_status']."</td>
+                <td>".$row['emergency_contact_name']."</td>
+                <td>".$row['emergency_contact_phone']."</td>
+                <td>".$row['insurance_provider']."</td>
+                <td>".$row['policy_number']."</td>
+                <td>".$row['medical_history']."</td>
+                <td>".$row['current_medications']."</td>
                 <td>".$row['allergies']."</td>
-                <td>".$row['smoking']."</td>
-                <td>".$row['alcohol']."</td>
-                <td>".$row['exercise']."</td>
               </tr>";
     }
     echo "</table>";
@@ -575,62 +578,58 @@
     $connection = new mysqli($servername, $username, $password, $database);
 
 
-$full_name = "";
-$date_of_birth = "";
+$first_name = "";
+$middle_name= "";
+$last_name = "";
+$birthday = "";
+$gender= "";
 $address = "";
-$phone_number = "";
 $email = "";
-$gestational_age = "";
-$due_date = "";
-$pregnancy_history = "";
-$prenatal_vitamins = "";
-$medical_conditions = "";
-$medications = "";
-$allergies = "";
-$smoking = "";
-$alcohol = "";
-$exercise = "";
+$phone = "";
+$marital_status = "";
+$emergency_contact_name = "";
+$emergency_contact_phone= "";
+$insurance_provider = "";
+$policy_number = "";
+$medical_history = "";
+$current_medications= "";
+$allergies= "";
 
 $errorMessage = "";
-
 // Check if the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the form
-    $full_name = $_POST["full_name"];
-    $date_of_birth = $_POST["date_of_birth"];
+    $first_name = $_POST["first_name"];
+    $middle_name = $_POST["middle_name"];
+    $last_name = $_POST["last_name"];
+    $birthday = $_POST["birthday"];
+    $gender = $_POST["gender"];
     $address = $_POST["address"];
-    $phone_number = $_POST["phone_number"];
     $email = $_POST["email"];
-    $gestational_age = $_POST["gestational_age"];
-    $due_date = $_POST["due_date"];
-    $pregnancy_history = $_POST["pregnancy_history"];
-    $prenatal_vitamins = $_POST["prenatal_vitamins"];
-    $medical_conditions= $_POST["medical_conditions"];
-    $medications = $_POST["medications"];
+    $phone = $_POST["phone"];
+    $marital_status = $_POST["marital_status"];
+    $emergency_contact_name = $_POST["emergency_contact_name"];
+    $emergency_contact_phone = $_POST["emergency_contact_phone"];
+    $insurance_provider = $_POST["insurance_provider"];
+    $policy_number = $_POST["policy_number"];
+    $medical_history = $_POST["medical_history"];
+    $current_medications = $_POST["current_medications"];
     $allergies = $_POST["allergies"];
-    $smoking = $_POST["smoking"];
-    $alcohol = $_POST["alcohol"];
-    $exercise = $_POST["exercise"];
 
-    do{
-      if(empty($full_name) || empty($date_of_birth) || empty($address) || empty($phone_number) || empty($email) || empty($gestational_age) || empty($due_date) || empty($pregnancy_history) || empty($prenatal_vitamins) || empty($medical_conditions) || empty($medications) || empty($allergies) || empty($smoking) || empty($alcohol) || empty($exercise)){
-        $errorMessage = "All the fields are required";
-        break;
-      }
-      
-      $sql = "INSERT INTO prenatal (full_name, date_of_birth, address, phone_number, email, gestational_age, due_date, pregnancy_history, prenatal_vitamins, medical_conditions, medications, allergies, smoking, alcohol, exercise)" . 
-      "VALUES ('$full_name', '$date_of_birth', '$address', '$phone_number', '$email', '$gestational_age', '$due_date', '$pregnancy_history', '$prenatal_vitamins', '$medical_conditions', '$medications', '$allergies', '$smoking', '$alcohol', '$exercise')";
+    do {
+        if (empty($first_name) || empty($last_name) || empty($birthday) || empty($gender) || empty($address) || empty($email) || empty($phone) || empty($marital_status) || empty($emergency_contact_name) || empty($emergency_contact_phone) || empty($insurance_provider) || empty($policy_number) || empty($medical_history) || empty($current_medications) || empty($allergies)) {
+            $errorMessage = "All the fields are required";
+            break;
+        }
 
-      $result = $connection->query($sql);
+        $sql = "INSERT INTO postnatal (first_name, middle_name, last_name, birthday, gender, address, email, phone, marital_status, emergency_contact_name, emergency_contact_phone, insurance_provider, policy_number, medical_history, current_medications, allergies)" . 
+               "VALUES ('$first_name', '$middle_name', '$last_name', '$birthday', '$gender', '$address', '$email', '$phone', '$marital_status', '$emergency_contact_name', '$emergency_contact_phone', '$insurance_provider', '$policy_number', '$medical_history', '$current_medications', '$allergies')";
 
-      if(!$result){
-        $errorMessage = "Invalid Query: ". $connection->error;
-      }
+        $result = $connection->query($sql);
 
-      
-    }while(false);
-
-
-
+        if (!$result) {
+            $errorMessage = "Invalid Query: " . $connection->error;
+        }
+    } while (false);
 }
 ?>
