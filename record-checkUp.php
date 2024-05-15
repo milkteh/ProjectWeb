@@ -419,6 +419,11 @@
               <i class="bi bi-circle"></i><span>Check Ups</span>
             </a>
           </li>
+          <li>
+            <a href="record-hearingTest.php">
+              <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Charts Nav -->
 

@@ -334,7 +334,11 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-
+          <li>
+            <a href="components-partoGraph.php">
+              <i class="bi bi-circle"></i><span>PartoGraph</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -381,7 +385,7 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="record-chart.php" >
+            <a href="record-chart.php">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
@@ -401,8 +405,28 @@
             </a>
           </li>
           <li>
-            <a href="record-discharge-slip.php" class="active" >
+            <a href="record-discharge-slip.php">
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-partoGraph.php">
+              <i class="bi bi-circle"></i><span>PartoGraph</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-checkUp.php">
+              <i class="bi bi-circle"></i><span>Check Ups</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-hearingTest.php">
+              <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-newBornScreening.php" class="active">
+              <i class="bi bi-circle"></i><span>New Born Screening</span>
             </a>
           </li>
         </ul>
@@ -449,12 +473,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Discharge Slip Records</h1>
+      <h1>New Born Screening</h1>
       <nav>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Records</li>
-          <li class="breadcrumb-item active">Discharge Slip Records</li>
+          <li class="breadcrumb-item active">New Born Screening</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -504,7 +528,7 @@
   }
 
   //read all row from database table
-  $sql = "SELECT * FROM discharge_slip";
+  $sql = "SELECT * FROM newbornscreening";
   $result = $connection->query($sql);
 
   if(!$result){
@@ -514,40 +538,26 @@
     echo "<table>
             <tr>
                 <th>ID</th>
-                <th>Mother Name</th>
-                <th>Baby Name</th>
-                <th>Date of Birth</th>
-                <th>Address</th>
-                <th>Contact Info</th>
-                <th>Birth details</th>
-                <th>Baby Weight</th>
-                <th>Baby Length</th>
-                <th>Apgar 1min</th>
-                <th>Apgar 5min</th>
-                <th>Complications</th>
-                <th>Mother Recovery</th>
-                <th>Baby Care</th>
-                <th>Medication Follow up</th>
-
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Date</th>
+                <th>Time</th>
+               
             </tr>";
     while($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>".$row['id']."</td>
-                <td>".$row['mother_name']."</td>
-                <td>".$row['baby_name']."</td>
-                <td>".$row['date_of_birth']."</td>
-                <td>".$row['address']."</td>
-                <td>".$row['contact_info']."</td>
-                <td>".$row['birth_details']."</td>
-                <td>".$row['baby_weight']."</td>
-                <td>".$row['baby_length']."</td>
-                <td>".$row['apgar_1min']."</td>
-                <td>".$row['apgar_5min']."</td>
-                <td>".$row['complications']."</td>
-                <td>".$row['mother_recovery']."</td>
-                <td>".$row['baby_care']."</td>
-                <td>".$row['medication_followup']."</td>
-                
+                <td>".$row['name']."</td>
+                <td>".$row['email']."</td>
+                <td>".$row['phone_number']."</td>
+                <td>".$row['date']."</td>
+                <td>".$row['time']."</td>
+                <td>
+                  <a class='btn' href = 'editNewBornScreening.php?id=$row[id]'> Edit </a>
+                  <a class='btn' href = 'deleteNewBornScreening.php?id=$row[id]'> Delete </a>
+                <td/>
+    
               </tr>";
     }
     echo "</table>";
@@ -555,60 +565,39 @@
 // Close database connection
 
 ?>
-
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "fivestardb";
-   
-    //create connection
-    $connection = new mysqli($servername, $username, $password, $database);
+$name = "";
+$email = "";
+$phone_number = "";
+$date = "";
+$time = "";
 
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Retrieve data from the form
+  
+  $name= $_POST["name"];
+  $email = $_POST["email"];
+  $phone_number = $_POST["phone_number"];
+  $date = $_POST["date"];
+  $time = $_POST["time"];
+
+  do{
+    if(empty($name) || empty($email) || empty($phone_number) || empty($date) || empty($time)) {
+      $errorMessage = "All the fields are required";
+      break;
     }
 
-$mother_name= "";
-$baby_name = "";
-$date_of_birth= "";
-$address= "";
-$contact_info = "";
-$birth_details = "";
-$baby_weight = "";
-$baby_length = "";
-$apgar_1min = "";
-$apgar_5min = "";
-$complications = "";
-$mother_recovery = "";
-$baby_care = "";
-$medication_followup = "";
+    $sql = "INSERT INTO newbornscreening (name, email, phone_number, date, time)" . 
+      "VALUES ('$name', '$email', '$phone_number', '$date', '$time' )";
 
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $mother_name = $_POST["mother_name"];
-    $baby_name = $_POST["baby_name"];
-    $date_of_birth = $_POST["date_of_birth"];
-    $address = $_POST["address"];
-    $contact_info = $_POST["contact_info"];
-    $birth_details = $_POST["birth_details"];
-    $baby_weight = $_POST["baby_weight"];
-    $baby_length = $_POST["baby_length"];
-    $apgar_1min = $_POST["apgar_1min"];
-    $apgar_5min = $_POST["apgar_5min"];
-    $complications = $_POST["complications"];
-    $mother_recovery = $_POST["mother_recovery"];
-    $baby_care = $_POST["baby_care"];
-    $medication_followup = $_POST["medication_followup"];
+      $result = $connection->query($sql);
 
-    $sql = "INSERT INTO discharge_slip (mother_name, baby_name, date_of_birth, address, contact_info, birth_details, baby_weight, baby_length, apgar_1min, apgar_5min, complications, mother_recovery, baby_care, medication_followup)".
-    "VALUES ('$mother_name', '$baby_name', '$date_of_birth', '$address', '$contact_info', '$birth_details,', '$baby_weight', '$baby_length', '$apgar_1min', '$apgar_5min', '$complications', '$mother_recovery', '$baby_care', '$medication_followup')";
+      if(!$result){
+        $errorMessage = "Invalid Query: ". $connection->error;
+      }
 
-$result = $connection->query($sql);
-
-if (!$result) {
-$errorMessage = "Invalid Query: " . $connection->error;
-
-} while (false);
-}
-?>
+      
+    }while(false);
+  
+  }
+  ?>

@@ -281,35 +281,31 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-chart.html">
+            <a href="components-chart.php">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
           </li>
           <li>
-            <a href="components-prenatal.html">
+            <a href="components-prenatal.php">
               <i class="bi bi-circle"></i><span>Prenatal</span>
             </a>
           </li>
           <li>
-            <a href="components-Postnatal.html">
+            <a href="components-Postnatal.php">
               <i class="bi bi-circle"></i><span>Postnatal</span>
             </a>
           </li>
           <li>
-            <a href="components-AddmissionSlip.html">
-              <i class="bi bi-circle"></i><span>Addmission Slip</span>
+            <a href="components-admission-slip.php">
+              <i class="bi bi-circle"></i><span>Admission Slip</span>
             </a>
           </li>
           <li>
-            <a href="components-DischargeSlip.html">
+            <a href="components-discharge-slip.php">
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="components-PartoGraph.html">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -383,10 +379,31 @@
             </a>
           </li>
           <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
+            <a href="record-admission-slip.php">
+              <i class="bi bi-circle"></i><span>Admission Slip</span>
             </a>
           </li>
+          <li>
+            <a href="record-discharge-slip.php">
+              <i class="bi bi-circle"></i><span>Discharge Slip</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-checkUp.php">
+              <i class="bi bi-circle"></i><span>Check Up</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-hearingTest.php">
+              <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-newBornScreening.php">
+              <i class="bi bi-circle"></i><span>New Born Screening</span>
+            </a>
+          </li>
+
         </ul>
       </li><!-- End Charts Nav -->
 
@@ -439,7 +456,70 @@
       </nav>
     </div><!-- End Page Title -->
 
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-up Appointment Form</title>
+    <style>
+        .con {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <form action="record-checkUp.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
 
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phonenumber">Phone Number:</label>
+            <input type="tel" id="phone" name="phone_number" required><br><br>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required><br><br>
+
+            <label for="time">Type of Check Up</label>
+            <input type="text" id="type" name="type" required><br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
 
 
 

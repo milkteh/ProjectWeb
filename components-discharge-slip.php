@@ -312,11 +312,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="components-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -389,8 +385,18 @@
             </a>
           </li>
           <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
+            <a href="record-checkUp.php">
+              <i class="bi bi-circle"></i><span>Check Up</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-hearingTest.php">
+              <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-newBornScreening.php">
+              <i class="bi bi-circle"></i><span>New Born Screening</span>
             </a>
           </li>
         </ul>

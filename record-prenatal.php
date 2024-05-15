@@ -334,11 +334,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="components-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -409,11 +405,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Charts Nav -->
 

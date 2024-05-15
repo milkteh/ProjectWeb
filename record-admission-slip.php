@@ -334,11 +334,6 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="components-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -409,11 +404,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Charts Nav -->
 
@@ -458,12 +449,12 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Prenatal Records</h1>
+      <h1>Admission Slip Records</h1>
       <nav>
       <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Records</li>
-          <li class="breadcrumb-item active">Prenatal Records</li>
+          <li class="breadcrumb-item active">Admission Slip Records</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

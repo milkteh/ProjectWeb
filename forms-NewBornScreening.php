@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Forms / Layouts - NiceAdmin Bootstrap Template</title>
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -244,13 +244,7 @@
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
+           
               <hr class="dropdown-divider">
             </li>
 
@@ -281,13 +275,12 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Patients Registration</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
+        <li>
             <a href="components-chart.php">
               <i class="bi bi-circle"></i><span>Charts</span>
             </a>
@@ -298,13 +291,13 @@
             </a>
           </li>
           <li>
-            <a href="components-postnatal.php">
+            <a href="components-Postnatal.php">
               <i class="bi bi-circle"></i><span>Postnatal</span>
             </a>
           </li>
           <li>
             <a href="components-admission-slip.php">
-              <i class="bi bi-circle"></i><span>Addmission Slip</span>
+              <i class="bi bi-circle"></i><span>Admission Slip</span>
             </a>
           </li>
           <li>
@@ -312,11 +305,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="components-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
         </ul>
       </li><!-- End Patient Registration Nav -->
 
@@ -390,18 +379,27 @@
             </a>
           </li>
           <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
+            <a href="record-checkUp.php">
+              <i class="bi bi-circle"></i><span>Check Up</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-hearingTest.php">
+              <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-newBornScreening.php">
+              <i class="bi bi-circle"></i><span>New Born Screening</span>
             </a>
           </li>
         </ul>
       </li><!-- End Charts Nav -->
 
-
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="users-profile.php">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
@@ -409,59 +407,118 @@
 
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="pages-contact.php">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="pages-register.php">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="pages-login.php">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>
       </li><!-- End Login Page Nav -->
 
 
+    </ul>
+
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Hearing Test</h1>
+      <h1>New Born Screening</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
           <li class="breadcrumb-item">Appointment Scheduling</li>
-          <li class="breadcrumb-item active">Hear Test</li>
+          <li class="breadcrumb-item active">New Born Screening</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-   
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Born Screening Appointment Form</title>
+    <style>
+        .con {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <form action="record-newBornScreening.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phonenumber">Phone Number:</label>
+            <input type="tel" id="phone" name="phone_number" required><br><br>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required><br><br>
+
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
 
 
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      
-    </div>
-    <div class="credits">
+ 
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      
-    </div>
+     
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
