@@ -410,11 +410,6 @@
             </a>
           </li>
           <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
-          <li>
             <a href="record-checkUp.php">
               <i class="bi bi-circle"></i><span>Check Ups</span>
             </a>

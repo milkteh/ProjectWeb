@@ -409,11 +409,7 @@
               <i class="bi bi-circle"></i><span>Discharge Slip</span>
             </a>
           </li>
-          <li>
-            <a href="record-partoGraph.php">
-              <i class="bi bi-circle"></i><span>PartoGraph</span>
-            </a>
-          </li>
+
           <li>
             <a href="record-checkUp.php" class="active">
               <i class="bi bi-circle"></i><span>Check Ups</span>
@@ -422,6 +418,11 @@
           <li>
             <a href="record-hearingTest.php">
               <i class="bi bi-circle"></i><span>Hearing Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="record-newBornScreening.php">
+              <i class="bi bi-circle"></i><span>New Born Screening</span>
             </a>
           </li>
         </ul>
